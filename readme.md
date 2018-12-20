@@ -116,7 +116,7 @@ public SchedulerFactoryBean quartzScheduler() {
 
 model2，使用quartz.propetties，存的是配置文件里面自定义的名字
 
-![两种显示名对比](.\sched_name.jpg)
+![两种显示名对比](./sched_name.jpg)
 
 -----
 
