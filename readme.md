@@ -38,7 +38,7 @@ model1和model2都是使用SpringBoot2.0特性，在pom引入SpringBoot提供的
 
 在application.yml配置`spring.quartz.properties` 属性，这样可以省略`quartz.properties`配置文件的定义；
 
-在service层(业务逻辑层 )注入Scheduler Bean,是可以的，得到使用`spring.quartz.properties`属性配置的Scheduler
+在service层(业务逻辑层 )注入Scheduler Bean,是可以的，得到使用`spring.quartz.properties`属性配置的Scheduler实例，然后使用scheduler创建自己所需的任务
 
 ````java
  @Autowired
@@ -54,6 +54,8 @@ model1和model2都是使用SpringBoot2.0特性，在pom引入SpringBoot提供的
 重启后，会自动运行任务调度器（即执行定义的任务）。
 
 注入的调度器（Scheduler)
+
+
 
 ### model2
 
@@ -81,6 +83,8 @@ public class QuartzManager {
 重启后，不会自动运行任务调度器，需要调用`QuartzManager.startJobs()`方法（该方法已定义好）启动所有定时任务，而且，每一个运行实例都需要这样，所以需要实现ApplicationRunner，在项目启动后，执行QuartzManager.startJobs()，马上开启所有定时任务
 
 通过新建未初始化工厂拿到的，`new StdSchedulerFactory().getScheduler()`;
+
+创建任务，直接调用QuartzManager.addJob（String Job_name）方法创建任务
 
 ```java
 @Component
@@ -140,7 +144,7 @@ In particular, an Executor bean is not associated with the scheduler as Quartz o
 
 详细参见，文章开头 ：springboot2.0 Quartz自动化配置集成
 
-另外：将QuartzManagercopy一份QuartzManager2，
+另外：将QuartzManager复制一份QuartzManager2，
 
 在addJob传入service层注入的Scheduler Bean
 
