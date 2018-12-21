@@ -3,6 +3,7 @@ package com.fiberhome.contoller;
 
 import com.fiberhome.job.TimeMassJob;
 import com.fiberhome.utils.QuartzManager;
+import com.fiberhome.utils.QuartzManager2;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,19 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("quartz")
 public class QuartzController {
 
-    /**
-     * 注入任务调度器
-     */
-    @Autowired
-    private Scheduler scheduler;
+
 
     @GetMapping("add")
     public String  addQuartz(String job_name){
         //String job_name = "job1";
-        QuartzManager.withScheduler(scheduler);
         QuartzManager.addJob(job_name, job_name, job_name, job_name, TimeMassJob.class, "0/10 * * * * ?", new Object[]{});
         return "请观察控制台！";
     }
+
+    @GetMapping("add2")
+    public String  addQuartz2(String job_name){
+        QuartzManager2.addSchedulJob(job_name, job_name, job_name, job_name, TimeMassJob.class, "0/10 * * * * ?", new Object[]{});
+        return "请观察控制台！";
+    }
+
 
  /*   @GetMapping("start")
     public String startQuartz(){

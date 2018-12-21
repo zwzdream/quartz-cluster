@@ -86,7 +86,7 @@ public class QuartzManager {
      * @param triggerGroupName 触发器组名
      * @param cron   时间设置，参考quartz说明文档
      */
-   /* public static void modifyJobTime(String jobName, String jobGroupName, String triggerName, String triggerGroupName, String cron) {
+    public static void modifyJobTime(String jobName, String jobGroupName, String triggerName, String triggerGroupName, String cron) {
         try {
             Scheduler scheduler = schedulerFactory.getScheduler();
             TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroupName);
@@ -112,7 +112,7 @@ public class QuartzManager {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
     /**
      * 功能: 移除一个任务
@@ -121,7 +121,7 @@ public class QuartzManager {
      * @param triggerName
      * @param triggerGroupName
      */
-/*    public static void removeJob(String jobName, String jobGroupName,String triggerName, String triggerGroupName) {
+    public static void removeJob(String jobName, String jobGroupName,String triggerName, String triggerGroupName) {
         try {
             Scheduler scheduler = schedulerFactory.getScheduler();
 
@@ -135,24 +135,24 @@ public class QuartzManager {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
     /**
      *
      * 功能：启动所有定时任务
      */
-   /* public static void startJobs() {
+    public static void startJobs() {
         try {
             Scheduler scheduler = schedulerFactory.getScheduler();
             scheduler.start();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
     /**
      * 功能：关闭所有定时任务
      */
-  /*  public static void shutdownJobs() {
+    public static void shutdownJobs() {
         try {
             Scheduler scheduler = schedulerFactory.getScheduler();
             if (!scheduler.isShutdown()) {
@@ -161,6 +161,6 @@ public class QuartzManager {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
 }

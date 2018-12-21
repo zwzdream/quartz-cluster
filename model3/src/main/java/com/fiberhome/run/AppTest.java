@@ -1,15 +1,22 @@
 package com.fiberhome.run;
 
+import com.fiberhome.utils.QuartzManager2;
+import org.quartz.Scheduler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AppTest implements ApplicationRunner {
+    @Autowired
+    private Scheduler scheduler;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
             try {
                 System.out.println("项目启动后立即执行这个方法");
+                QuartzManager2.withSchedule(scheduler);
                 //String job_name = "job1";
                 //System.out.println("【系统启动】开始(每1秒输出一次)...");
                 //QuartzManager.startJobs();

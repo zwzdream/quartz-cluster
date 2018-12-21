@@ -2,7 +2,9 @@ package com.fiberhome.service;
 
 
 import com.fiberhome.dao.IUserDao;
+import com.fiberhome.job.TimeMassJob;
 import com.fiberhome.pojo.User;
+import com.fiberhome.utils.QuartzManager2;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,4 +69,15 @@ public class UserService {
         }
         return "add";
     }
+
+    /**
+     * 把业务层注入的Schedule bean传给QuartzManager2
+     * @param job_name
+     * @return
+     */
+    public String addJob2(String job_name){
+        QuartzManager2.addJob(scheduler,job_name, job_name, job_name, job_name, TimeMassJob.class, "0/10 * * * * ?", new Object[]{});
+         return "add2";
+    }
+
 }

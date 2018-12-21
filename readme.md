@@ -139,3 +139,43 @@ In particular, an Executor bean is not associated with the scheduler as Quartz o
 至于model3，是springboot2.0以前使用quartz 集权的写法，也就是springboot2.0提供quartz集群自动化配置的源码。（功能一样，写法可能略有出入）
 
 详细参见，文章开头 ：springboot2.0 Quartz自动化配置集成
+
+另外：将QuartzManagercopy一份QuartzManager2，
+
+在addJob传入service层注入的Scheduler Bean
+
+```
+
+public static void addJob(Scheduler scheduler,String jobName, String jobGroupName, String triggerName, String triggerGroupName, Class jobClass, String cron,Object...objects) {
+   ...
+   }
+```
+
+或者在里面定义withSchedule绑定schedule的方法，在`ApplicationRunner`实现类中进行绑定
+
+```
+public class QuartzManager2 {
+    private static Scheduler scheduler ;
+
+    public static void withSchedule(Scheduler scheduler){
+        QuartzManager2.scheduler=scheduler;
+    }
+```
+
+```
+@Component
+public class AppTest implements ApplicationRunner {
+    @Autowired
+    private Scheduler scheduler;
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+                System.out.println("项目启动后立即执行这个方法");
+                QuartzManager2.withSchedule(scheduler);
+                ......
+   }
+```
+
+------
+
+mock测试时，必须给全URI，例如`localhost:8020/user/hi`，会出错，必须为`http://localhost:8020/user/hi`.
