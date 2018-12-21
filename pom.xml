@@ -11,9 +11,12 @@
         <module>model1</module>
         <module>model2</module>
         <module>model3</module>
+        <module>model4</module>
     </modules>
     <name>quartz</name>
     <packaging>pom</packaging>
+
+
 
 
 </project>
